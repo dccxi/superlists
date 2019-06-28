@@ -1,4 +1,4 @@
 db.sqlite3
-gechodriver.log
+geckodriver.log
 __pycache__
 *.pyc
