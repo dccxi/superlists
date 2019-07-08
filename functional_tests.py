@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import unittest
 
+
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -28,7 +29,8 @@ class NewVisitorTest(unittest.TestCase):
 
         # She is invited to enter a to-do item straight away
         inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
+        self.assertEqual(inputbox.get_attribute(
+            'placeholder'), 'Enter a to-do item')
 
         # She types "Buy peacock feathers" into a text box
         # (Edith's hobby is trying fly-fishing lures)
@@ -49,7 +51,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # The page updates again, and now shows both items on her lists
         self.check_for_row_in_list_table('1: Buy peacock feathers')
-        self.check_for_row_in_list_table('2: Use peacock to make a fly')
+        self.check_for_row_in_list_table('2: Use peacock feather to make a fly')
 
         # Edith wonders whether the site will remember her lists. Then
         # she sees that the site has generated a unique URL for her --
@@ -59,6 +61,7 @@ class NewVisitorTest(unittest.TestCase):
         # She visits that URL - her to-do lists is still there
 
         # Satisfied, she goes back to sleep
+
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
