@@ -1,4 +1,5 @@
-## Deployment Process
+## Deployment Process (nonautomated)
+On remote server:
 * Provisioning
     * Create or add a new user account in sudo group, and home folder
         * `$ useradd -m -s /bin/bash elspeth`
@@ -31,3 +32,18 @@
     * `$ manage.py collectstatic` for static files
     * Restart Gunicorn
     * Run FT to check
+
+## Deployment Process (automated)
+On local machine:
+```shell
+$ pip3 install fabric3
+```
+
+Make sure `~/.local` is in `PATH`, and `~/.ssh` exists, then:
+
+``` shell
+$ USER=deploy_user
+$ HOST=example.com
+$ cd deploy_tools
+$ fab deploy:sitename=superlists.dccxi.com,host=$USER@$HOST
+```
