@@ -5,7 +5,7 @@ import random
 REPO_URL = "https://dccxi@bitbucket.org/dccxi/superlists.git"
 
 
-def deploy(sitename):
+def deploy(sitename, live="True"):
     site_folder = f"/home/{env.user}/sites/{sitename}"
     source_folder = site_folder + "/source"
     _crete_directory_structure_if_necessary(site_folder)
@@ -14,7 +14,8 @@ def deploy(sitename):
     _update_virtualenv(source_folder)
     _update_static_files(source_folder)
     _update_database(source_folder)
-    _deploy_to_live(source_folder, sitename)
+    if live == "True":
+        _deploy_to_live(source_folder, sitename)
 
 
 def _crete_directory_structure_if_necessary(site_folder):
