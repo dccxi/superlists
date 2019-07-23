@@ -33,7 +33,7 @@ class ExistingListItemFormTest(TestCase):
     def test_form_renders_item_text_input(self):
         list_ = List.objects.create()
         form = ExistingListItemForm(for_list=list_)
-        self.assertIn('Placeholder="Enter a to-do item"', form.as_p())
+        self.assertIn('placeholder="Enter a to-do item"', form.as_p())
 
     def test_form_validation_for_blank_items(self):
         list_ = List.objects.create()
