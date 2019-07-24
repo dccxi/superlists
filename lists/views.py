@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.views.generic import FormView, CreateView, DetailView, DetailView
+from django.shortcuts import redirect
+from django.views.generic import FormView, CreateView, DetailView
 from lists.models import List
 from lists.forms import ItemForm, ExistingListItemForm
 
