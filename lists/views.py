@@ -15,6 +15,7 @@ class ViewAndAddToList(DetailView, CreateView):
     form_class = ExistingListItemForm
 
     def get_form(self):
+        self.object = self.get_object()
         return self.form_class(
             for_list=self.get_object(), data=self.request.POST
         )
