@@ -77,5 +77,5 @@ def _deploy_to_live(source_folder, site_name):
         " && sudo systemctl daemon-reload"
         " && sudo systemctl reload nginx"
         f" && sudo systemctl enable gunicorn-{site_name}"
-        f" && sudo systemctl start gunicorn-{site_name}"
+        f" && sudo systemctl restart gunicorn-{site_name}"
     )
