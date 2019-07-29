@@ -15,10 +15,13 @@ class ViewAndAddToList(DetailView, CreateView):
     form_class = ExistingListItemForm
 
     def get_form(self):
-        self.object = self.get_object()
-        return self.form_class(
-            for_list=self.get_object(), data=self.request.POST
-        )
+        if self.object == None:
+            # when POSTing, CreateView was used and self.object was wiped out
+            # which causes url problem if no form was saved like when duplicate
+            # or empty form occurred
+            self.object = self.get_object()
+            return self.form_class(for_list=self.object, data=self.request.POST)
+        return self.form_class(for_list=self.object)
 
 
 class NewListView(CreateView):
