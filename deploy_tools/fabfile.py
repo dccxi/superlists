@@ -2,7 +2,7 @@ from fabric.contrib.files import append, exists, sed
 from fabric.api import env, local, run
 import random
 
-REPO_URL = "https://dccxi@bitbucket.org/dccxi/superlists.git"
+REPO_URL = "https://bitbucket.org/dccxi/superlists.git"
 
 
 def deploy(sitename, live="True"):
