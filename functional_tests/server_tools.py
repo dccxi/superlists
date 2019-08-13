@@ -4,7 +4,7 @@ from fabric.context_managers import settings
 
 
 def _get_manage_dot_py(sitename):
-    return f"~/sites/{sitename}/virtualenv/bin/python ~/sites/{sitename}/manage.py"
+    return f"~/sites/{sitename}/virtualenv/bin/python ~/sites/{sitename}/source/manage.py"
 
 def reset_database(sitename):
     manage_dot_py = _get_manage_dot_py(sitename)
