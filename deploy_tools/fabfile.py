@@ -5,7 +5,7 @@ import random
 REPO_URL = "https://bitbucket.org/dccxi/superlists.git"
 
 
-def deploy(sitename, live="True"):
+def deploy(sitename, email_password, live="True"):
     site_folder = f"/home/{env.user}/sites/{sitename}"
     source_folder = site_folder + "/source"
     _crete_directory_structure_if_necessary(site_folder)
@@ -15,7 +15,7 @@ def deploy(sitename, live="True"):
     _update_static_files(source_folder)
     _update_database(source_folder)
     if live == "True":
-        _deploy_to_live(source_folder, sitename)
+        _deploy_to_live(source_folder, sitename, email_password)
 
 
 def _crete_directory_structure_if_necessary(site_folder):
@@ -68,12 +68,12 @@ def _update_database(source_folder):
     run(f"cd {source_folder} && ../virtualenv/bin/python manage.py migrate --noinput")
 
 
-def _deploy_to_live(source_folder, site_name):
+def _deploy_to_live(source_folder, site_name, email_password):
     run(
         f"cd {source_folder}"
         f' && sed "s/SITENAME/{site_name}/g" deploy_tools/nginx.template.conf | sudo tee /etc/nginx/sites-available/{site_name}'
         f" && sudo ln -sf ../sites-available/{site_name} /etc/nginx/sites-enabled/{site_name}"
-        f' && sed "s/SITENAME/{site_name}/g" deploy_tools/gunicorn-systemd.template.service | sudo tee /etc/systemd/system/gunicorn-{site_name}.service'
+        f' && sed "s/EMAILPSWD/{email_password}/g; s/SITENAME/{site_name}/g" deploy_tools/gunicorn-systemd.template.service | sudo tee /etc/systemd/system/gunicorn-{site_name}.service'
         " && sudo systemctl daemon-reload"
         " && sudo systemctl reload nginx"
         f" && sudo systemctl enable gunicorn-{site_name}"
