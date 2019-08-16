@@ -1,3 +1,30 @@
+## Introduction
+Superlists is a todo-list web app featuring:
+- Passwordless Login using only email
+- Save separate todo lists for logged in user
+- Access saved todo lists using URL for anonymous users
+
+Feel free to check it out at: https://superlists.dccxi.com
+
+It's a practice project I built during the summer of 2019 while learning Django, Linux, and Web Development as well as TDD methodology in general.
+
+The most of the parts in the project was following the first 23 out of 26 chapters of the book *Test-Driven Development with Python, 2e* by Harry Percival. It's a very thoughtful book with smooth learning curve, definitely worth your time if you are curious about TDD or simply want to try out Django for web development.
+
+Over the course of building this project, I gained a better understanding of the following subjects:
+- Django Framework
+- Python Language
+    - LEGB Scoping
+    - Runtime Dynamic Linking
+    - Application of Decorators
+    - OOP and FP Styles
+- Server Provisioning
+- Testing
+    - Mocking
+    - Unit Tests
+    - Functional Tests
+    - Integration Tests between Layers (ex. view and model)
+- etc.
+
 ## Deployment Process (nonautomated)
 On remote server:
 * Provisioning
@@ -42,10 +69,25 @@ $ pip3 install fabric3
 Make sure `~/.local` is in `PATH`, and `~/.ssh` exists, then:
 
 ``` shell
-$ USER=deploy_user
-$ HOST=example.com
+$ R_USER=deploy_user
+$ R_HOST=example.com
 $ cd deploy_tools
-$ fab deploy:sitename=superlists.dccxi.com,host=$USER@$HOST
+$ EMAIL_PASSWORD={} # replace {} with SMTP password of your own email
+$ fab deploy:sitename={},email_password=$EMAIL_PASSWORD,host=$R_USER@$R_HOST # replace {} with your own domain name
+```
+
+### Running Functional Tests against Staging Server before Production
+```shell
+$ EMAIL_PASSWORD={} # replace {} with SMTP password of your own email
+$ STAGING_SERVER={} # replace {} with your own staging server ** domain name **
+$ remote_host={}    # replace {} with your own staging server ** IP **
+$ python manage.py test functional_tests
+$ # remember to unset the STAGING_SERVER variable otherwise local FT will fail
+$ unset STAGING_SERVER
+```
+or to avoid using `unset`:
+```shell
+$ STAGING_SERVER={} EMAIL_PASSWORD={} remote_host={} python manage.py test functional_tests
 ```
 
 ## Provisioning with Ansible (before deployment)
