@@ -18,6 +18,8 @@ Over the course of building this project, I gained a better understanding of the
     - Application of Decorators
     - OOP and FP Styles
 - Server Provisioning
+    - Automated Provisioning using Ansible and/or Fabric
+    - Nginx Configuration
 - Testing
     - Mocking
     - Unit Tests
