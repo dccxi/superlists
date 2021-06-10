@@ -1,7 +1,7 @@
 appdirs==1.4.3
 attrs==19.1.0
 Click==7.0
-Django==1.11.23
+Django==2.2.24
 pytz==2019.1
 selenium==3.141.0
 toml==0.10.0
